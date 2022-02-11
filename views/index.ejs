@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" charset="utf-8">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js"></script>
+        <title>JOIN GAME | Lab Game</title>
+    </head>
+    <body>
+        <div id="header">
+            <h1>LAB GAME</h1>
+        </div>
+        <div id="content">
+            <% if(error != null) { %>
+                <p class="error"><%= error %></p>
+            <% } %>
+            <div class="heading-container">
+                <h2>JOIN GAME</h2>
+            </div>
+            <form action="/room" method="POST">
+                <input id="team1" type="radio" name="team" value="team1" checked>
+                <label for="team1">Team 1</label>
+                <br>
+                <input id="team2" type="radio" name="team" value="team2">
+                <label for="team2">Team 2</label>
+                <br>
+                <input id="obs" type="radio" name="team" value="obs">
+                <label for="obs">Observe</label>
+                <br>
+                <input id="roomname" class="text-input" type="text" name="roomname" placeholder="Enter Room Name" required>
+                <br><br>
+                <input class="button" type="submit" value="Enter">
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js"></script>
+        <title>ROOM | Lab Game</title>
+    </head>
+    <body>
+        <div id="burger-menu" onclick="showDialog()">
+            <svg viewBox="0 0 100 80" width="40" height="40">
+                <rect width="100" height="20" fill="white"></rect>
+                <rect y="30" width="100" height="20" fill="white"></rect>
+                <rect y="60" width="100" height="20" fill="white"></rect>
+            </svg>
+        </div>
+        <div id="header">
+            <h1>LAB GAME</h1>
+        </div>
+        <div id="content">
+            <div class="heading-container">
+                <h2 id="room-text"></h2>
+            </div>
+            <p>
+                Team 1: <span id="team1-status">Not connected</span><br>
+                Team 2: <span id="team2-status">Not connected</span>
+            </p>
+            <table id="table" class="table"></table>
+            <a href="./">
+                <div class="button anchor-button">Back</div>
+            </a>
+        </div>
+        <div id="overlay">
+            <div id="dialog">
+                <div id="dialog-header">
+                    <p>SCORE SYSTEM</p>
+                    <div id="close-dialog" onclick="hideDialog()">
+                        <img src="/img/X.png"></img>
+                    </div>
+                </div>
+                <div id="dialog-content">
+                    <p>Test</p>
+                    <table>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/table.js"></script>
+    <script src="/game.js"></script>
+    <script src="/burger.js"></script>
+</html>
