@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
 app.get('/room', (req, res) => {
     //Check URL parameter is valid and render room template
     if(req.query.team == 'team1' || req.query.team == 'team2' || req.query.team == 'obs') {
-        res.render('room');
+        res.render('room', {room: req.query.roomname});
     }
     else {
         ssn = req.session;
