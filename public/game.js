@@ -4,8 +4,8 @@ const team1Status = $('#team1-status');
 const team2Status = $('#team2-status');
 const table = $('#table');
 
-//Socket server URL
-const socket = io.connect('http://localhost:3000');
+//Connect client to server
+const socket = io.connect();
 
 //Get params from URL
 const queryString = window.location.search;

@@ -7,6 +7,7 @@ const socketio = require('socket.io');
 
 //Import custom utils
 const socket = require('./utils/socket');
+const {hostname, port} = require('./config');
 const {isTeamConnected} = require('./utils/teams');
 
 //Initialise express server and socket
@@ -14,9 +15,6 @@ const app = express();
 const server = http.createServer(app);
 const options = {allowEIO3: true};
 const io = socketio(server, options);
-
-//Server port number
-const PORT = process.env.PORT || 3000;
 
 //Variable to store session data
 var ssn;
@@ -92,6 +90,6 @@ app.post('/room', (req, res) => {
 socket(io);
 
 //Start server
-server.listen(PORT, () => {
-    console.log('Server running on port ' + PORT)
+server.listen(port, hostname, () => {
+    console.log('Server running on ' + hostname + ', port: ' + port)
 });
