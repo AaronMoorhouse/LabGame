@@ -22,7 +22,9 @@ function setRoutes(app) {
     //GET: room
     app.get('/room', (req, res) => {
         //Check URL parameter is valid and render room template
-        if(req.query.team == 'team1' || req.query.team == 'team2' || req.query.team == 'obs') {
+        const validParams = ['team1', 'team2', 'obs'];
+
+        if(validParams.includes(req.query.team)) {
             res.render('room', {room: req.query.roomname});
         }
         else {
