@@ -68,7 +68,10 @@ socket.on('start-round', ({room}) => {
 socket.on('round-complete', ({room, scores, colours}) => {
     roundInProgress = false;
     updateTable(scores, colours);
-    waitRoundStart();
+
+    if(team != 'obs') {
+        waitRoundStart();
+    }
 });
 
 init();
