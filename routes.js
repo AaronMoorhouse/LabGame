@@ -45,7 +45,14 @@ function setRoutes(app) {
         //Check selected team is not already connected to specified room
         if(isTeamConnected(team, roomname)) {
             ssn = req.session;
-            ssn.errorMsg = "Error: This team is already connected to the specified room";
+
+            if(team == "fac") {
+                ssn.errorMsg = "Error: A facilitator is already connected to the specified room";
+            }
+            else {
+                ssn.errorMsg = "Error: This team is already connected to the specified room";
+            }
+
             res.redirect('./');
         }
         else {
