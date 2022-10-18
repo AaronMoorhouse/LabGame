@@ -54,10 +54,8 @@ socket.on('online-teams', ({room, teams, scores, colours, inProgress}) => {
     roundInProgress = inProgress;
     updateTable(scores, colours);
 
-    if(roundInProgress != null) {
-        if(!roundInProgress && team != 'obs') { 
-            waitRoundStart();
-        }
+    if(!roundInProgress && team != 'obs') { 
+        waitRoundStart();
     }
 });
 

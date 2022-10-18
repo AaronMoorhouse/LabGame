@@ -32,7 +32,8 @@ function socket(io) {
 
                 io.to(team.room).emit('online-teams', {
                     room: team.room,
-                    teams: teams
+                    teams: teams,
+                    inProgress: isRoundInProgress()
                 });
 
                 if(teams.length == 0) {
