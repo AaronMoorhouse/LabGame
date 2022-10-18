@@ -52,6 +52,10 @@ socket.on('online-teams', ({room, teams, scores, colours}) => {
     }
 
     updateTable(scores, colours);
+
+    if(!roundInProgress && team != 'obs') { 
+        waitRoundStart();
+    }
 });
 
 socket.on('start-round', ({room}) => {
@@ -61,7 +65,9 @@ socket.on('start-round', ({room}) => {
 
 //Listen for end of round - both teams have selected a colour
 socket.on('round-complete', ({room, scores, colours}) => {
+    roundInProgress = false;
     updateTable(scores, colours);
+    waitRoundStart();
 });
 
 init();
@@ -80,10 +86,6 @@ function init() {
     }
 
     displayTotalScores([]);
-
-    if(!roundInProgress && team != 'obs') { 
-        waitRoundStart();
-    }
 }
 
 /**
@@ -121,7 +123,7 @@ function updateTable(scores, colours) {
 }
 
 function waitRoundStart() {
-    showDialog(roundNo);
+    showDialog();
 
     $('#start-button').on('click', () => {
         socket.emit('start-round', {
