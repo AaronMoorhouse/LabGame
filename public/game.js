@@ -14,6 +14,7 @@ const team = urlParams.get('team');
 const roomname = urlParams.get('roomname');
 
 //Game variables
+var roundInProgress = false;
 var roundNo = 1;
 
 roomText.html("Room: " + roomname);
@@ -53,6 +54,11 @@ socket.on('online-teams', ({room, teams, scores, colours}) => {
     updateTable(scores, colours);
 });
 
+socket.on('start-round', ({room}) => {
+    roundInProgress = true;
+    hideDialog();
+});
+
 //Listen for end of round - both teams have selected a colour
 socket.on('round-complete', ({room, scores, colours}) => {
     updateTable(scores, colours);
@@ -74,6 +80,10 @@ function init() {
     }
 
     displayTotalScores([]);
+
+    if(!roundInProgress && team != 'obs') { 
+        waitRoundStart();
+    }
 }
 
 /**
@@ -108,4 +118,14 @@ function updateTable(scores, colours) {
             });
         }
     }
+}
+
+function waitRoundStart() {
+    showDialog(roundNo);
+
+    $('#start-button').on('click', () => {
+        socket.emit('start-round', {
+            room: roomname
+        });
+    });
 }

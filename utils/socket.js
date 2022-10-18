@@ -59,6 +59,12 @@ function socket(io) {
             }
         });
 
+        socket.on('start-round', ({room}) => {
+            io.to(room).emit('start-round', {
+                room: room
+            });
+        });
+
         socket.on('game-over', ({room}) => {
             clearGame(room);
             console.log('game over: ' + JSON.stringify(getRoundScores(room)));
