@@ -26,7 +26,7 @@ socket.emit('joined-team', {
 });
 
 //Listen for other team joining/leaving the room
-socket.on('online-teams', ({room, teams, scores, colours}) => {
+socket.on('online-teams', ({room, teams, scores, colours, inProgress}) => {
     const teamStrings = [];
 
     teams.forEach(team => {
@@ -51,10 +51,13 @@ socket.on('online-teams', ({room, teams, scores, colours}) => {
         team2Status.css('color', 'red');
     }
 
+    roundInProgress = inProgress;
     updateTable(scores, colours);
 
-    if(!roundInProgress && team != 'obs') { 
-        waitRoundStart();
+    if(roundInProgress != null) {
+        if(!roundInProgress && team != 'obs') { 
+            waitRoundStart();
+        }
     }
 });
 

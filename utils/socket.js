@@ -1,5 +1,5 @@
 const {addTeam, removeTeam, getRoomTeams, isTeamConnected} = require('./teams');
-const {addColour, getColours, calculateRoundScores, isRoundComplete, getRoundScores, clearGame} = require('./score');
+const {addColour, getColours, calculateRoundScores, isRoundComplete, getRoundScores, setRoundInProgress, isRoundInProgress, clearGame} = require('./score');
 
 //Socket connection
 function socket(io) {
@@ -18,7 +18,8 @@ function socket(io) {
                     room: room,
                     teams: getRoomTeams(room),
                     scores: getRoundScores(room),
-                    colours: getColours(room)
+                    colours: getColours(room),
+                    inProgress: isRoundInProgress()
                 });
             }
         });
@@ -45,6 +46,7 @@ function socket(io) {
             console.log('colours: '+JSON.stringify(getColours(room)));
 
             if(isRoundComplete(addedColour)) {
+                setRoundInProgress(false);
                 calculateRoundScores(addedColour.team1, addedColour.team2, room);
 
                 const scores = getRoundScores(room);
@@ -60,6 +62,8 @@ function socket(io) {
         });
 
         socket.on('start-round', ({room}) => {
+            setRoundInProgress(true);
+
             io.to(room).emit('start-round', {
                 room: room
             });

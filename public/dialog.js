@@ -4,7 +4,6 @@ const header = $('#dialog-header');
 
 function showDialog() {
     var html = '';
-    console.log(roundNo);
 
     if(roundNo > 1) {
         header.html('<p>ROUND ' + (roundNo - 1) + '</p>');
