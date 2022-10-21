@@ -2,12 +2,20 @@ const overlay = $('#overlay');
 const content = $('#dialog-content');
 const header = $('#dialog-header');
 
-function showDialog() {
+function showDialog(colours) {
     var html = '';
 
     if(roundNo > 1) {
+        if(colours != null && colours.length > 0) {
+            const i = colours.length - 1;
+            const colour1 = colours[i].team1;
+            const colour2 = colours[i].team2;
+
+            html += '<p>Team 1 picked <span class="dialog-colour" style="color:' + colour1 + '">' + colour1 + '</span>!';
+            html += '</br>Team 2 picked <span class="dialog-colour" style="color:' + colour2 + '">' + colour2 + '</span>!';
+        }
+
         header.html('<p>ROUND ' + (roundNo - 1) + '</p>');
-        html += '<p>Team 1 picked (colour)!</br>Team 2 picked (colour)!';
     }
     else {
         header.html('<p>ROUND ' + roundNo + '</p>');

@@ -97,6 +97,10 @@ h1, h2 {
     color:red;
 }
 
+.dialog-colour {
+    text-transform: uppercase;
+}
+
 #burger-menu {
     width: fit-content;
     height: fit-content;
