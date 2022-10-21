@@ -39,8 +39,11 @@ h1, h2 {
 .heading-container {
     width: 273px;
     margin-bottom: 10px;
-    padding: 11px 0;
+    padding: 8px 0;
+    display: inline-block;
     background-color: black;
+
+    border: 3px solid black;
 }
 
 .heading-container h2 {
@@ -49,6 +52,14 @@ h1, h2 {
     display: inline-block;
     line-height: 1.4em;
     color: white;
+}
+
+.role-container {
+    background-color: transparent;
+}
+
+.role-container h2 {
+    color: black;
 }
 
 .table th {

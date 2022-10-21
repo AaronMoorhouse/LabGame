@@ -1,5 +1,6 @@
 //Template elements
 const roomText = $('#room-text');
+const roleText = $('#role-text');
 const team1Status = $('#team1-status');
 const team2Status = $('#team2-status');
 const table = $('#table');
@@ -17,7 +18,15 @@ const roomname = urlParams.get('roomname');
 var roundInProgress = false;
 var roundNo = 1;
 
+//Display room name and view type
 roomText.html("Room: " + roomname);
+
+switch(team) {
+    case 'team1': roleText.html('Team 1'); break;
+    case 'team2': roleText.html('Team 2'); break;
+    case 'fac': roleText.html('Facilitator'); break;
+    case 'obs': roleText.html('Observer'); break;
+}
 
 //Notify that your team has joined the room
 socket.emit('joined-team', {
