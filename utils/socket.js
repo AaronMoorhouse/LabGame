@@ -19,7 +19,7 @@ function socket(io) {
                     teams: getRoomTeams(room),
                     scores: getRoundScores(room),
                     colours: getColours(room),
-                    inProgress: isRoundInProgress()
+                    inProgress: isRoundInProgress(room)
                 });
             }
         });
@@ -33,7 +33,7 @@ function socket(io) {
                 io.to(team.room).emit('online-teams', {
                     room: team.room,
                     teams: teams,
-                    inProgress: isRoundInProgress()
+                    inProgress: isRoundInProgress(team.room)
                 });
 
                 if(teams.length == 0) {
@@ -44,15 +44,15 @@ function socket(io) {
 
         socket.on('colour-selected', ({teamNo, colour, room}) => {
             const addedColour = addColour(teamNo, colour, room);
-            console.log('colours: '+JSON.stringify(getColours(room)));
+            //console.log('colours: '+JSON.stringify(getColours(room)));
 
             if(isRoundComplete(addedColour)) {
-                setRoundInProgress(false);
+                setRoundInProgress(false, room);
                 calculateRoundScores(addedColour.team1, addedColour.team2, room);
 
                 const scores = getRoundScores(room);
                 const colours = getColours(room);
-                console.log('scores: '+JSON.stringify(scores));
+                //console.log('scores: '+JSON.stringify(scores));
 
                 io.to(room).emit('round-complete', {
                     room: room,
@@ -63,7 +63,7 @@ function socket(io) {
         });
 
         socket.on('start-round', ({room}) => {
-            setRoundInProgress(true);
+            setRoundInProgress(true, room);
 
             io.to(room).emit('start-round', {
                 room: room
