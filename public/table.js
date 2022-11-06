@@ -2,7 +2,7 @@
  * Render the table to display the selected colours and round scores.
  * 
  * @param {number} rows Number of rows
- * @param {rumber} cols Number of Columns
+ * @param {rumber} cols Number of columns
  */
 function drawGrid(rows, cols) {
     var html = '<tr><th>Round Number</th><th>Team 1 Colour</th><th>Team 1 Points</th><th>Team 2 Colour</th><th>Team 2 Points</th></tr>';

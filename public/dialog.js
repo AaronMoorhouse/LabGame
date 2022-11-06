@@ -1,10 +1,18 @@
+//Template elements
 const overlay = $('#overlay');
 const content = $('#dialog-content');
 const header = $('#dialog-header');
 
+/**
+ * Display the dialog box on screen to allow the facilitator to begin the round and inform teams they are waiting on the facilitator.
+ * Also displays the colour selections of both teams from the previous round.
+ * 
+ * @param {Array<Object>} colours The array of colour objects containing the selected colours for the current room
+ */
 function showDialog(colours) {
     var html = '';
 
+    //Determine the colours picked by the teams in the previous round
     if(roundNo > 1) {
         if(colours != null && colours.length > 0) {
             const i = colours.length - 1;
@@ -21,6 +29,7 @@ function showDialog(colours) {
         header.html('<p>ROUND ' + roundNo + '</p>');
     }
 
+    //Display 'start' button for facilitator and 'waiting' text for teams
     if(team == 'fac') {
         html += '<p>Press \'Start\' to begin round ';
         html += (roundNo > 1) ? roundNo : '1';
@@ -33,10 +42,14 @@ function showDialog(colours) {
         html += '...</p>';
     }
 
+    //Add HTML content to dialog and display dialog on screen
     content.html(html);
     overlay.css('display', 'block');
 }
 
+/**
+ * Remove the dialog box from the screen.
+ */
 function hideDialog() {
     overlay.css('display', 'none');
 }

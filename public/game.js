@@ -68,6 +68,7 @@ socket.on('online-teams', ({room, teams, scores, colours, inProgress}) => {
     }
 });
 
+//Listen for start of round - facilitator initiates the round
 socket.on('start-round', ({room}) => {
     roundInProgress = true;
     hideDialog();
@@ -135,9 +136,15 @@ function updateTable(scores, colours) {
     }
 }
 
+/**
+ * Display dialog between rounds.
+ * 
+ * @param {Array<Object>} colours The array of colour objects containing the selected colours for the current room
+ */
 function waitRoundStart(colours) {
     showDialog(colours);
 
+    //Add listener to 'start round' button on facilitator view
     $('#start-button').on('click', () => {
         socket.emit('start-round', {
             room: roomname
