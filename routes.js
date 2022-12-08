@@ -9,7 +9,7 @@ function setRoutes(app) {
         var error;
 
         //Get error message if one has been set and clear from session variable
-        if(ssn.errorMsg) {
+        if(ssn.errorMsg !== null) {
             error = ssn.errorMsg;
             ssn.errorMsg = null;
         }
@@ -21,20 +21,34 @@ function setRoutes(app) {
 
     //GET: room
     app.get('/room', (req, res) => {
+        ssn = req.session;
+        const team = req.query.team;
+        const roomname = req.query.roomname;
+
         //Check URL parameter is valid and render room template
         const validParams = ['team1', 'team2', 'obs', 'fac'];
 
-        if(validParams.includes(req.query.team)) {
-            res.render('room', {room: req.query.roomname});
-        }
-        else {
-            ssn = req.session;
+        if(!validParams.includes(req.query.team)) {
             ssn.errorMsg = "Error: Invalid URL";
             res.redirect('./');
         }
+        //Check selected team is not already connected to specified room
+        else if(team !== "obs" && isTeamConnected(team, roomname)) {
+            if(team == "fac") {
+                ssn.errorMsg = "Error: A facilitator is already connected to the specified room";
+            }
+            else {
+                ssn.errorMsg = "Error: " + team + " is already connected to the specified room";
+            }
+            
+            res.redirect('./');
+        }
+        else {
+            res.render('room', {room: req.query.roomname});
+        }
 
         res.end();
-    })
+    });
 
     //POST: room
     app.post('/room', (req, res) => {
@@ -42,23 +56,8 @@ function setRoutes(app) {
         roomname = req.body.roomname;
         team = req.body.team;
 
-        //Check selected team is not already connected to specified room
-        if(isTeamConnected(team, roomname)) {
-            ssn = req.session;
-
-            if(team == "fac") {
-                ssn.errorMsg = "Error: A facilitator is already connected to the specified room";
-            }
-            else {
-                ssn.errorMsg = "Error: This team is already connected to the specified room";
-            }
-
-            res.redirect('./');
-        }
-        else {
-            //Send GET request to room with valid team and room name
-            res.redirect('/room?roomname=' + roomname + '&team=' + team);
-        }
+        //Send GET request to room with valid team and room name
+        res.redirect('/room?roomname=' + roomname + '&team=' + team);
 
         res.end();
     });
