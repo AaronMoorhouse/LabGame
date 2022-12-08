@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" charset="utf-8">
+    <script>
+        if(performance.navigation.type == 2) {
+            location.reload(true);
+        }
+    </script>
     <head>
         <%- include('partials/head', {title: 'Join Game | Red/Blue Game'}); %>
     </head>
