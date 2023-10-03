@@ -22,8 +22,8 @@ var roundNo = 1;
 roomText.html("Room: " + roomname);
 
 switch(team) {
-    case 'team1': roleText.html('Team 1'); break;
-    case 'team2': roleText.html('Team 2'); break;
+    case 'team1': roleText.html('Team A'); break;
+    case 'team2': roleText.html('Team B'); break;
     case 'fac': roleText.html('Facilitator'); break;
     case 'obs': roleText.html('Observer'); break;
 }

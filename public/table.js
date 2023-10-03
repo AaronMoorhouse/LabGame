@@ -5,7 +5,7 @@
  * @param {rumber} cols Number of columns
  */
 function drawGrid(rows, cols) {
-    var html = '<tr><th>Round Number</th><th>Team 1 Colour</th><th>Team 1 Points</th><th>Team 2 Colour</th><th>Team 2 Points</th></tr>';
+    var html = '<tr><th>Round Number</th><th>Team A Colour</th><th>Team A Points</th><th>Team B Colour</th><th>Team B Points</th></tr>';
     var tiles = 0;
     const totalTiles = rows * cols - 3;
 
