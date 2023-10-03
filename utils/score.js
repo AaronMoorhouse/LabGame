@@ -37,6 +37,7 @@ function getColours(room) {
 
 function calculateRoundScores(colour1, colour2, room) {
     var score = {room: room};
+    var roundNo = getRoundScores(room).length + 1;
 
     if(colour1 == 'red' && colour2 == 'red') {
         score.team1 = 3;
@@ -56,6 +57,15 @@ function calculateRoundScores(colour1, colour2, room) {
         score.team2 = -3;
     }
 
+    console.log(room + ": round " + roundNo);
+
+    //Double scores for rounds 9 and 10
+    if(roundNo >= 9) {
+        score.team1 *= 2;
+        score.team2 *= 2;
+    }
+
+    console.log(JSON.stringify(score));
     return roundScores.push(score);
 }
 
