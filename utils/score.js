@@ -44,13 +44,13 @@ function calculateRoundScores(colour1, colour2, room) {
         score.team2 = 3;
     }
     else if(colour1 == 'red' && colour2 == 'blue') {
-        score.team1 = 6;
-        score.team2 = -6;
+        score.team1 = -6;
+        score.team2 = 6;
     }
 
     else if(colour1 == 'blue' && colour2 == 'red') {
-        score.team1 = -6;
-        score.team2 = 6;
+        score.team1 = 6;
+        score.team2 = -6;
     }
     else {
         score.team1 = -3;
