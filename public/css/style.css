@@ -139,6 +139,23 @@ h1, h2 {
     padding: 20px 30px;
 }
 
+#status-container {
+    
+}
+
+#status-l, #status-r {
+    float: left;
+    width: 12.5%;
+}
+
+#status-l {
+    border-right: solid 1px #dee2e6;
+}
+
+#timer {
+    text-align: center;
+}
+
 #team1-status, #team2-status {
     color: red;
 }
